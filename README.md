@@ -47,4 +47,4 @@ ArrayList maintains insertion order and allows duplicates. HashSet does not allo
 Without overriding `equals()` and `hashCode()`, Java compares objects by memory address,so two Month objects with the same 
 name are treated as different elements by HashSet. 
 Once `equals()` and `hashCode()` are overridden to compare by name, duplicates are correctly detected and rejected.
-The for-each loop is simpler and more readable for basic traversal.
+The for-each loop is simpler and more readable for basic traversal, while the Iterator provides more control over the iteration process.
