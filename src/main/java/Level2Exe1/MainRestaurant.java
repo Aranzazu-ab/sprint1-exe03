@@ -16,9 +16,8 @@ public class MainRestaurant {
         System.out.println("There are " +manage.getNumberOfRestaurants()+ " mexican restaurants:");
         manage.showRestaurants();
 
-
-
-
+        System.out.println("Ordered Restaurants:");
+        manage.showOrderedRestaurants();
 
     }
 }

@@ -149,4 +149,98 @@ duplicates during the game.
 `BufferedReader` and `BufferedWriter` simplify file reading and writing operations, while exception handling with 
 `IOException` prevents the application from crashing when file-related errors occur.
 
+# LEVEL 2 COLLECTIONS
 
+## EXERCISE 1 HASHSET WITHOUT EXACT DUPLICATES
+The goal of this exercise it explore HashSet handles duplicates when working with custom objects, and why overriding 
+`equals()` and `hashCode()` are essential to control what counts as a duplicate.
+
+## STRUCTURE
+```text
+Level2Exe1/
+├── MainRestaurant.java
+├── ManageRestaurant.java
+└── Restaurant.java
+```
+
+**Restaurant:**
+* `name`
+* `score`
+* `equals()` and `hashCode()` 
+* `toString()` 
+
+**ManageRestaurant:**
+* `mexicanRestaurants (HashSet<Restaurant>) `
+* `addRestaurant(String name, int score)`
+* `showRestaurants() `
+* `getNumberOfRestaurants()` 
+
+**MainRestaurant:**
+Entry point. Creates a ManageRestaurant instance, adds several restaurants including intentional duplicates and same-name 
+restaurants with different scores, then prints the results.
+
+## TESTING
+Seven restaurants are added, two with the same name but different score, and two with same name and same score.
+"La Guerita Mexicana" - 8
+"El Pachuco"          - 7
+"La Fabrica del Taco" - 10
+"El Pachuco"          - 6  ← same name than the second one, but another score
+"San Pedrito"         - 8
+"La Guerita Mexicana" - 8  ← exact duplicate of the first entry
+
+Since `equals()` compares both name and score, only the last entry is rejected as a duplicate.
+"El Pachuco" with score 7 and "El Pachuco" with score 6 are treated as different restaurants because their scores differ.
+"La Guerita Mexicana" with score 8 appears twice in the input, but only once in the set.
+
+Output:
+There are 5 mexican restaurants:
+La Guerita Mexicana - 8
+El Pachuco - 7
+La Fabrica del Taco - 10
+El Pachuco - 6
+San Pedrito - 8
+
+## CONCLUSIONS
+
+Without overriding `equals()` and `hashCode()`, Java compares objects by memory address, so every new Restaurant(...) would 
+be treated as a unique element regardless of its content — the HashSet would accept all 6 entries including the exact duplicate.
+By overriding both methods, the HashSet can correctly identify that two Restaurant objects with the same `name` and `score `
+are the same, and reject the duplicate.
+
+`hashCode()` uses O`bjects.hash(name, score)` so two restaurants with the same name and score always produce the same hash, 
+which is required for `HashSet` to work correctly — if two objects are equal according to `equals()`, they must have the 
+same `hashCode()`.
+
+# EXERCISE 2 MULTIPLE SORTING
+Building on the previous exercise, the goal of this is that Restaurant now implement to support sorting alphabetically by 
+name and when the names are equal, by score in descending order.
+
+## CHANGES STRUCTURE
+`Restaurant` 
+* implements `Comparable<Restaurant>`
+* `compareTo(Restaurant other)` 
+
+**ManageRestaurant**
+* showOrderedRestaurants() 
+that copies the `HashSet` into an `ArrayList`, and sorts it with `Collections.sort()` and prints the result.
+
+## TESTING
+Using the same 5 restaurants from Exercise 1, calling `showOrderedRestaurants()`:
+
+Output:
+Ordered Restaurants:
+El Pachuco - 7
+El Pachuco - 6
+La Fabrica del Taco - 10
+La Guerita Mexicana - 8
+San Pedrito - 8
+
+"El Pachuco" appears twice with different scores — sorted alphabetically first, then by score descending (7 before 6).
+
+## CONCLUSIONS
+`Comparable` defines the natural ordering of a class directly inside it, which makes sense when there is one clear, default 
+way to sort the objects.
+`compareTo()` returns 0 if objects are equal in order, a negative number if this comes first, and a positive number if other 
+comes first. `Integer.compare(other.score, this.score)` inverts the normal order to get descending score sorting.
+HashSet does not support sorting, so the elements are first copied into an ArrayList before calling `Collections.sort()`, 
+which uses the `compareTo()` method defined in Restaurant.

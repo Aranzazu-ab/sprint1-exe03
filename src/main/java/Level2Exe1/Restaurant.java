@@ -2,7 +2,7 @@ package Level2Exe1;
 
 import java.util.Objects;
 
-public class Restaurant {
+public class Restaurant implements Comparable <Restaurant> {
     private String name;
     private int score;
 
@@ -15,7 +15,7 @@ public class Restaurant {
         return name;
     }
 
-    public int getScore(int score) {
+    public int getScore() {
         return score;
     }
 
@@ -40,6 +40,15 @@ public class Restaurant {
     @Override
     public String toString(){
         return name +" - " +score;
+    }
+
+    @Override
+    public int compareTo(Restaurant other){
+        int result= name.compareTo(other.name);
+        if (result != 0){
+            return result;
+        }
+        return Integer.compare(other.getScore(),getScore());
     }
 
 
