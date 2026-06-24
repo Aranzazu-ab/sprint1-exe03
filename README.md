@@ -7,7 +7,7 @@ introduced.
 
 ### STRUCTURE
 ```text
-level01/
+level1Exe1/
 ├── Main.java
 └── Month.java
 ```
@@ -48,3 +48,39 @@ Without overriding `equals()` and `hashCode()`, Java compares objects by memory 
 name are treated as different elements by HashSet. 
 Once `equals()` and `hashCode()` are overridden to compare by name, duplicates are correctly detected and rejected.
 The for-each loop is simpler and more readable for basic traversal, while the Iterator provides more control over the iteration process.
+
+
+## EXERCISE 2 LIST ITERATOR
+In this exercise the goal is manipulate a List and the use of `ListIterator` to traverse a list in reverse order.
+
+### STRUCTURE
+``` text 
+Level1Exe2/
+├── Main.java
+└── ManageList.java
+```
+
+**ManageList**
+* `createList`(int... numbers) — creates and fills a list from the given values
+* `reverseList`(List<Integer> originalList) — returns a new list with the elements in reverse order using a `ListIterator`
+
+
+**Main**
+Calls `ManageList` to create the original list and get the reversed one, then prints both results.
+
+### TESTING
+`ListManager.createList()` is called with values from 0 to 10.
+Output: Original: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+`ListManager.reverseList()` creates a `ListIterator` positioned at the end of the original list using `listIterator(originalList.size())`.
+It traverses the list backwards using `hasPrevious()` and `previous()`, adding each element to a new list.
+Output: Reversed: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+### CONCLUSIONS
+`ListIterator` extends `Iterator` and allows traversal in both directions, making it the right tool for reading a list in 
+reverse without modifying the original.
+Positioning the cursor at `list.size()` places it after the last element, so the first call to `previous()` returns the last element.
+Separating the list logic into `ManageList` keeps Main clean and focused only on orchestrating the program.
+Both the parameter and return type of `reverseList()` are declared as `List<Integer>` instead of `ArrayList<Integer>`, following 
+the good practice of programming against the interface rather than the implementation.
+
