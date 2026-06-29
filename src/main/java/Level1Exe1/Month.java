@@ -1,7 +1,9 @@
 package Level1Exe1;
 
+import java.util.Objects;
+
 public class Month {
-    private String name;
+    private final String name;
 
     public Month (String name){
         this.name= name;
@@ -17,15 +19,10 @@ public class Month {
     }
 
     @Override
-    public boolean equals (Object obj){
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Month)) {
-            return false;
-        }
-        Month month = (Month) obj;
-        return name.equals((month.name));
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Month month = (Month) o;
+        return Objects.equals(name, month.name);
     }
 
     @Override

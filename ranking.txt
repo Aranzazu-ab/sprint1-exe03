@@ -5,3 +5,5 @@ df - 8 points
 s - 0 points
 aab - 9 points
 abc - 8 points
+Nobody - 0 points
+fdsalkjfsd - 7 points

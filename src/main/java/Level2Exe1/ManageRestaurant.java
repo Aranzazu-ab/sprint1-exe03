@@ -12,8 +12,8 @@ public class ManageRestaurant {
         mexicanRestaurants = new HashSet<>();
     }
 
-    public void addRestaurant( String name, int score){
-        mexicanRestaurants.add(new Restaurant(name, score));
+    public void addRestaurant( Restaurant restaurant){
+        mexicanRestaurants.add(restaurant);
     }
 
     public void showRestaurants(){

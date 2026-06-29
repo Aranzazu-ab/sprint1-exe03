@@ -5,13 +5,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class ManageList {
-    public static List<Integer> createList(int... numbers) {
-        List<Integer> list = new ArrayList<>();
-        for (int n : numbers) {
-            list.add(n);
-        }
-        return list;
-    }
 
     public static List<Integer> reverseList(List<Integer> originalList) {
         List<Integer> reversed = new ArrayList<>();

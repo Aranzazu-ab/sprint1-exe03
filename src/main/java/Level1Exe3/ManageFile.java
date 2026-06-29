@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class ManageFile {
 
-    public HashMap<String, String> loadFile (String fileName) throws IOException{
+    public HashMap<String, String> loadFile (String fileName) {
         HashMap<String, String> countries = new HashMap<>();
 
         try (BufferedReader reader =new BufferedReader(new FileReader(fileName))){
@@ -19,6 +19,8 @@ public class ManageFile {
                     countries.put(parts[0].replace("_", " ").trim(), parts[1].replace("_", " ").replace("-"," ").trim());
                 }
             }
+        } catch (IOException error) {
+            System.out.printf("Error loading file: " + error.getMessage());
         }
         return countries;
     }

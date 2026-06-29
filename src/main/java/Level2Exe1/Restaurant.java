@@ -20,16 +20,10 @@ public class Restaurant implements Comparable <Restaurant> {
     }
 
     @Override
-    public boolean equals (Object object){
-        if (this==object){
-            return true;
-        }
-        if (! (object instanceof Restaurant)){
-            return false;
-        }
-
-        Restaurant obj = (Restaurant) object;
-        return name.equals((obj.name)) && score == obj.score;
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Restaurant that = (Restaurant) o;
+        return score == that.score && Objects.equals(name, that.name);
     }
 
     @Override

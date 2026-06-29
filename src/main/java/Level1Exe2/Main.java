@@ -6,7 +6,7 @@ import java.util.ListIterator;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> firstList = ManageList.createList(0,1,2,3,4,5,6,7,8,9,10);
+        List<Integer> firstList = List.of(0,1,2,3,4,5,6,7,8,9,10);
         System.out.println("Original: " + firstList);
 
         List<Integer> secondList = ManageList.reverseList(firstList);
